@@ -3,8 +3,8 @@ This twistd plugin enables to start the tracker using the twistd command.
 
 Select the port you want to use by setting the `listen_port` command line argument.
 """
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import os
 import random
@@ -20,7 +20,7 @@ from twisted.internet.task import LoopingCall
 from twisted.plugin import IPlugin
 from twisted.python import usage
 from twisted.python.log import msg
-from zope.interface import implements
+from zope.interface import implementer
 
 from ipv8.community import Community
 from ipv8.messaging.payload import IntroductionRequestPayload
@@ -48,10 +48,10 @@ class EndpointServer(Community):
     Make some small modifications to the Community to allow it a dynamic prefix.
     We will also only answer introduction requests.
     """
-    master_peer = Peer(default_eccrypto.generate_key(u"very-low"))
+    master_peer = Peer(default_eccrypto.generate_key("very-low"))
 
     def __init__(self, endpoint):
-        my_peer = Peer(default_eccrypto.generate_key(u"very-low"))
+        my_peer = Peer(default_eccrypto.generate_key("very-low"))
         self.signature_length = default_eccrypto.get_signature_length(my_peer.public_key)
         super(EndpointServer, self).__init__(my_peer, endpoint, Network())
         self.churn_strategy = SimpleChurn(self)
@@ -107,8 +107,8 @@ class Options(usage.Options):
     optFlags = []
 
 
+@implementer(IServiceMaker, IPlugin)
 class TrackerServiceMaker(object):
-    implements(IServiceMaker, IPlugin)
     tapname = "tracker"
     description = "IPv8 tracker twistd plugin"
     options = Options

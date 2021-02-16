@@ -125,9 +125,9 @@ class RandomWalk(object):
         actual_pos = {}
 
         for nodeid in self.gr.nodes():
-            if nodeid not in self.pos.keys() or self.pos[nodeid] is None:
+            if nodeid not in list(self.pos.keys()) or self.pos[nodeid] is None:
                 continue
-            if nodeid not in self.oldpos.keys():
+            if nodeid not in list(self.oldpos.keys()):
                 actual_pos[nodeid] = (0.9
                                       + (frame_number
                                          * (self.normal_pos[nodeid][0] - 0.9)
@@ -152,7 +152,7 @@ class RandomWalk(object):
         x1s, x2s, y1s, y2s, lws = [], [], [], [], []
 
         # print('Setting edge positions')
-        print(len(self.local_vision.component.edges))
+        print((len(self.local_vision.component.edges)))
         for edge in self.local_vision.component.edges:
             x1s.append(actual_pos[edge[0]][0])
             y1s.append(actual_pos[edge[0]][1])
@@ -196,11 +196,11 @@ class RandomWalk(object):
             return
 
         for nodeid in self.gr.nodes():
-            if (((nodeid not in self.normal_pos.keys())
+            if (((nodeid not in list(self.normal_pos.keys()))
                  or (self.pos[nodeid] is None))):
                 continue
 
-            if nodeid not in self.oldpos.keys():
+            if nodeid not in list(self.oldpos.keys()):
                 actual_pos[nodeid] = (0.9
                                       + (self.frame_number
                                          * (self.normal_pos[nodeid][0] - 0.9)
@@ -277,10 +277,10 @@ class RandomWalk(object):
             if self.attr['size'][node] == par_remove_size:
                 if random.random() < remove_prob:
                     self.local_vision.graph.remove_node(node)
-                    print("Node {} is removed from the graph".format(node))
+                    print(("Node {} is removed from the graph".format(node)))
 
     def apply_function_to_attr(self, attrname, f):
-        for nodeid in self.attr[attrname].keys():
+        for nodeid in list(self.attr[attrname].keys()):
             self.attr[attrname][nodeid] = f(self.attr[attrname][nodeid])
 
     def test(self, event):
@@ -418,7 +418,7 @@ class RandomWalk(object):
     def walk_anim_update(self, frame_number):
         # self.current_index = frame_number % self.n_nodes
 
-        print('Walk', self.n_walk)
+        print(('Walk', self.n_walk))
         if self.n_walk < 1:
             # self.animation.event_source.stop()
             self.animation_controller('walkfinished')
@@ -440,7 +440,7 @@ class RandomWalk(object):
                                                             * 0.02
                                                             * random.random()
                                                             - 0.002)))
-        print('minsize', min(list(self.attr['size'].values())))
+        print(('minsize', min(list(self.attr['size'].values()))))
         self.scat.set_sizes(self.node_sizes)
 
         # Update node colors
@@ -482,7 +482,7 @@ class RandomWalk(object):
         self.current_node = self.next_node
 
     def normalize_positions_dict(self, width=0.80, margin=0.05):
-        poslist = [v for v in self.pos.values() if v is not None]
+        poslist = [v for v in list(self.pos.values()) if v is not None]
         minx = min(poslist, key=lambda t: t[0])[0]
         miny = min(poslist, key=lambda t: t[1])[1]
         maxx = max(poslist, key=lambda t: t[0])[0]
@@ -490,7 +490,7 @@ class RandomWalk(object):
 
         newposlist = {}
 
-        for node, pos in self.pos.items():
+        for node, pos in list(self.pos.items()):
             if pos is not None:
                 nposx = ((pos[0] - minx) / (maxx - minx)) * width + margin
                 nposy = ((pos[1] - miny) / (maxy - miny)) * width + margin

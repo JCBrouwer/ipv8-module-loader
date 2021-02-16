@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 # Default library imports
 from binascii import unhexlify, hexlify
@@ -146,7 +146,7 @@ class ModuleCommunity(Community, BlockListener):
         """
         module_package_directory = os.path.join(self.working_directory, MODULE_PACKAGE_DIR, name)
 
-        print module_package_directory
+        print(module_package_directory)
 
         if not os.path.isdir(module_package_directory):
             self._logger.info("module-community: module package (%s) does not exists", name)

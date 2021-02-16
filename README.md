@@ -2,8 +2,9 @@
 
 ## Setup
 ```
-pip install -r requirements.txt
-sudo apt install python-libtorrent
+# conda deactivate
+python3 -m pip install -r requirements.txt
+sudo apt install python3-libtorrent
 export PYTHONPATH="${PYTHONPATH}:."
 ```
 

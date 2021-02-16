@@ -19,7 +19,7 @@ class FakeGraph(object):
         transactions = []
         for t in range(tr_count):
             node1 = randint(0, self.nodecount-1)
-            node2 = choice(self.gr.adj[node1].keys())
+            node2 = choice(list(self.gr.adj[node1].keys()))
             transactions.append({'uploader': node1,
                                  'downloader': node2,
                                  'amount': 50 + random() * 50})
@@ -32,7 +32,7 @@ class FakeGraph(object):
             node1 = local_node
             node2 = choice(list(self.gr.nodes()))
             if not new_nodes:
-                node2 = choice(self.gr.adj[node1].keys())
+                node2 = choice(list(self.gr.adj[node1].keys()))
 
             if random() < upload_bias_prob:
                 transactions.append({'uploader': node1,

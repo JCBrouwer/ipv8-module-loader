@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 import os
 # Default library imports
@@ -12,7 +12,7 @@ from module_loader.community.module.core.module import Module
 from module_loader.community.module.core.module_identifier import ModuleIdentifier
 
 # Constants
-DATABASE_DIRECTORY = os.path.join(u"sqlite")  # Database sub-directory
+DATABASE_DIRECTORY = os.path.join("sqlite")  # Database sub-directory
 
 
 class ModuleDatabase(Database):
@@ -32,8 +32,8 @@ class ModuleDatabase(Database):
         :param db_name: The name of the database
         :type db_name: str
         """
-        if working_directory != u":memory:":
-            db_path = os.path.join(working_directory, os.path.join(DATABASE_DIRECTORY, u"{0}.db".format(db_name)))
+        if working_directory != ":memory:":
+            db_path = os.path.join(working_directory, os.path.join(DATABASE_DIRECTORY, "{0}.db".format(db_name)))
         else:
             db_path = working_directory
 
@@ -48,7 +48,7 @@ class ModuleDatabase(Database):
         """
         Return the schema for the database.
         """
-        return u"""
+        return """
         CREATE TABLE IF NOT EXISTS module_cache (
             public_key  TEXT NOT NULL,
             info_hash   TEXT NOT NULL,

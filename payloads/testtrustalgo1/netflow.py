@@ -172,4 +172,4 @@ graph.add_edge(10, 9, capacity=0)
 n = Netflow(graph, 3)
 n.compute()
 
-print "Trust score is: " + str(n.graph.nodes()[1]['score'])
+print("Trust score is: " + str(n.graph.nodes()[1]['score']))

@@ -9,7 +9,7 @@ from twisted.python import usage
 from twisted.python.log import msg
 from twisted.web import server
 from twisted.web.static import File
-from zope.interface import implements
+from zope.interface import implementer
 
 
 class Options(usage.Options):
@@ -18,8 +18,8 @@ class Options(usage.Options):
     ]
 
 
+@implementer(IServiceMaker, IPlugin)
 class WebServiceMaker(object):
-    implements(IServiceMaker, IPlugin)
     tapname = "module-loader-web"
     description = "module loader web application"
     options = Options

@@ -93,7 +93,7 @@ class NodeVision(object):
             else:
                 n_not_rem += 1
         if remove:
-            print('Removed: {}, Not removed: {}'.format(n_rem, n_not_rem))
+            print(('Removed: {}, Not removed: {}'.format(n_rem, n_not_rem)))
             self.graph.remove_edges_from(to_be_removed)
 
     def normalize_edge_weights(self, minwidth=0.5, maxwidth=2):
@@ -125,7 +125,7 @@ class NodeVision(object):
         pos = gpos.hierarchy_pos(bfstree, self.rootnode,
                                              width=2*math.pi, xcenter=0)
         new_pos = {u: (r*math.cos(theta), r*math.sin(theta))
-                   for u, (theta, r) in pos.items()}
+                   for u, (theta, r) in list(pos.items())}
         # for u, (x, y) in new_pos.items():
         #     self.graph[u]['pos'] = (x, y)
         nx.set_node_attributes(self.graph, new_pos, 'pos')

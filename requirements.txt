@@ -1,4 +1,5 @@
-pyipv8
+pyipv8==1.10
 service_identity
 yappi
 six
+twisted

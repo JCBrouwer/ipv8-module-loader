@@ -72,7 +72,7 @@ class CLI(LineReceiver):
                         raise ValueError
 
                     # Call the matching function
-                    self.main_menu_items[int(line)].values()[0](line)
+                    list(self.main_menu_items[int(line)].values())[0](line)
                 except (ValueError, IndexError):
                     self.print_main_menu()
             elif self.menu_level == self.MENU_MODULE_LIST:
@@ -104,7 +104,7 @@ class CLI(LineReceiver):
                         return
 
                     # Call the matching function
-                    self.module_menu_items[int(line)].values()[0](line)
+                    list(self.module_menu_items[int(line)].values())[0](line)
                 except (ValueError, IndexError):
                     self.print_module_menu()
             else:
@@ -117,7 +117,7 @@ class CLI(LineReceiver):
         msg(self._colorize('\n' + self.header, 'pink'))
         msg(self._colorize('version 0.1', 'green'))
         for item in self.main_menu_items:
-            msg(self._colorize("[" + str(self.main_menu_items.index(item)) + "] ", 'blue') + item.keys()[0])
+            msg(self._colorize("[" + str(self.main_menu_items.index(item)) + "] ", 'blue') + list(item.keys())[0])
 
     def print_module_list_menu(self):
         os.system('clear')
@@ -148,7 +148,7 @@ class CLI(LineReceiver):
         msg(self._colorize("[-1] ", 'blue') + self._colorize("Return to previous menu", 'green'))
 
         for item in self.module_menu_items:
-            msg(self._colorize("[" + str(self.module_menu_items.index(item)) + "] ", 'blue') + item.keys()[0])
+            msg(self._colorize("[" + str(self.module_menu_items.index(item)) + "] ", 'blue') + list(item.keys())[0])
 
     def reset(self):
         self.menu_level = self.MENU_MAIN

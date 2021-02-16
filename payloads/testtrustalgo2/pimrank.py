@@ -14,7 +14,7 @@ class PimRank:
         try:
             pimrank = self.pagerank_scipy_patched(self.graph, personalization=self.personalization, weight=self.weight)
         except nx.NetworkXException as e:
-            print(str(e))
+            print((str(e)))
             print("Empty Temporal PageRank, returning empty scores")
             return {}
 
@@ -23,7 +23,7 @@ class PimRank:
 
         sums = {}
 
-        for interaction in pimrank.keys():
+        for interaction in list(pimrank.keys()):
             sums[interaction] = sums.get(interaction, 0) + pimrank[interaction]
 
         return sums
@@ -135,7 +135,7 @@ class PimRank:
             # check convergence, l1 norm
             err = scipy.absolute(x - xlast).sum()
             if err < N * tol:
-                return dict(zip(nodelist, map(float, x)))
+                return dict(list(zip(nodelist, list(map(float, x)))))
         print(err)
         raise nx.NetworkXError('pagerank_scipy: power iteration failed to converge '
                                'in %d iterations.' % max_iter)
@@ -245,4 +245,4 @@ graph.add_edge(10, 9, capacity=0)
 n = PimRank(graph, {1: 0.1, 2: 0.0, 3: 0.1, 4: 0.2, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.1, 10: 0.1})
 score = n.compute()
 
-print "Trust score is: " + str(score[4])
+print("Trust score is: " + str(score[4]))

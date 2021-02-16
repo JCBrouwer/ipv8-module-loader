@@ -1,7 +1,7 @@
 """
 This twistd plugin starts a TrustChain crawler.
 """
-from __future__ import absolute_import
+
 
 import logging
 import os
@@ -15,7 +15,7 @@ from twisted.internet import reactor
 from twisted.plugin import IPlugin
 from twisted.python import usage
 from twisted.python.log import msg
-from zope.interface import implements
+from zope.interface import implementer
 
 from ipv8_service import IPv8
 from ipv8.attestation.trustchain.settings import TrustChainSettings
@@ -42,8 +42,8 @@ configuration = {
     'keys': [
         {
             'alias': "my peer",
-            'generation': u"medium",
-            'file': u"ec.pem"
+            'generation': "medium",
+            'file': "ec.pem"
         }
     ],
     'logger': {
@@ -98,8 +98,8 @@ configuration = {
 }
 
 
+@implementer(IServiceMaker, IPlugin)
 class TrustServiceMaker(object):
-    implements(IServiceMaker, IPlugin)
     tapname = "trust"
     description = "trust"
     options = Options

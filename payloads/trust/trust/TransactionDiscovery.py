@@ -1,7 +1,7 @@
 import trust.trust.FakeNetwork as fk
 import networkx as nx
 from trust.trust.NodeVision import NodeVision
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import json
 from random import random 
 
@@ -35,7 +35,7 @@ class TransactionDiscovery(object):
             return glob_trs + loc_trs
         else:
             url = "http://localhost:8001/trustchain/recent?limit={}".format(tr_count * 100)
-            response = urllib.urlopen(url)
+            response = urllib.request.urlopen(url)
             data = json.loads(response.read())['blocks']
 
             transactions = []

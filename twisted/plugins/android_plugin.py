@@ -2,7 +2,7 @@
 twistd plugin enables to start a cli using the twistd command.
 """
 
-from __future__ import absolute_import
+
 
 # Default library imports
 import logging
@@ -21,7 +21,7 @@ from twisted.python.log import msg
 from twisted.web.static import File
 
 # Third party imports - Util
-from zope.interface import implements
+from zope.interface import implementer
 
 # Third party imports - IPv8
 from ipv8.attestation.trustchain.community import TrustChainTestnetCommunity
@@ -48,8 +48,8 @@ class Options(usage.Options):
     ]
 
 
+@implementer(IServiceMaker, IPlugin)
 class AndroidServiceMaker(object):
-    implements(IServiceMaker, IPlugin)
     tapname = "module-loader-android"
     description = "module service for Android"
     options = Options
@@ -104,8 +104,8 @@ class AndroidServiceMaker(object):
         configuration['port'] = network_port
         configuration['keys'] = [{
             'alias': 'my peer',
-            'generation': u"curve25519",
-            'file': os.path.join(state_directory, u"ec.pem")
+            'generation': "curve25519",
+            'file': os.path.join(state_directory, "ec.pem")
         }]
         configuration['logger'] = {'level': "ERROR"}
         configuration['overlays'] = [{
